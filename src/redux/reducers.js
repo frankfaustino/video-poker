@@ -1,20 +1,20 @@
 let id = 1
 const suits = ['♣', '♦', '❤', '♠']
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king']
-const deck = suits.reduce((arr, suit) => {
-  numbers.forEach(number => arr.push({ id: id++, number, suit, kept: false }))
-  return arr
-}, [])
+const deck = suits.reduce((arr, suit) => [...arr, ...numbers.map(number => ({ id: id++, number, suit, kept: false }))], [])
 
 const initialState = {
   deck,
   hand: {},
-  discard: {},
-  go: false
+  go: false,
+  score: null,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'GET_SCORE': {
+      return { ...state, go: false }
+    }
     case 'SHUFFLE_DECK': {
       const deck = [...state.deck]
       deck.forEach((card, i) => {
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
       let hand
 
       if (keys.length) {
-        hand = {...state.hand}
+        hand = { ...state.hand }
         keys.forEach(i => {
           if (hand[i].kept) {
             hand[i].kept = false
@@ -43,17 +43,15 @@ export default (state = initialState, action) => {
         })
       } else {
         const cards = deck.splice(0, 5)
-        hand = cards.reduce((obj, card, i) => {
-          obj[i] = card
-          return obj
-        }, {})
+        hand = cards.reduce((obj, card, i) => ({ ...obj, [i]: card }), {})
       }
       return { ...state, deck, hand }
     }
-    case 'TOGGLE_CARD':
-      const hand = {...state.hand}
+    case 'TOGGLE_CARD': {
+      const hand = { ...state.hand }
       hand[action.id].kept = !hand[action.id].kept
-      return { ...state, hand }
+      return { ...state, hand, go: true }
+    }
     default:
       return state
   }

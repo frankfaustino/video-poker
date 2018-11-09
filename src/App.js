@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Card from './components/Card'
-import { dealCards, shuffleDeck } from './redux/actions'
+import Button from './components/Button'
+import Hand from './components/Hand'
+import Score from './components/Score'
+import { dealCards, getScore, shuffleDeck } from './redux/actions'
 
-class App extends Component {
+class App extends PureComponent {
   componentDidMount() {
     const { dealCards, shuffleDeck } = this.props
     shuffleDeck()
@@ -13,14 +15,14 @@ class App extends Component {
   }
 
   render() {
-    const { dealCards, go, hand } = this.props
-
+    const { dealCards, getScore, go } = this.props
     return (
       <div className="app">
-        <div className="hand">
-          {Object.keys(hand).map(i => <Card key={i} {...hand[i]} id={i} />)}
-        </div>
-        <button className="button" onClick={dealCards}>{go ? 'Go' : 'Deal'}</button>
+        <Hand />
+        <Button clickHandler={go ? getScore : dealCards}>
+          {go ? 'Go' : 'Deal'}
+        </Button>
+        <Score />
       </div>
     )
   }
@@ -28,12 +30,10 @@ class App extends Component {
 
 App.propTypes = {
   dealCards: PropTypes.func.isRequired,
-  deck: PropTypes.array.isRequired,
-  hand: PropTypes.object.isRequired,
   shuffleDeck: PropTypes.func.isRequired
 }
 
 export default connect(
-  ({ go, deck, hand }) => ({ go, deck, hand }),
-  { dealCards, shuffleDeck }
+  ({ go }) => ({ go }),
+  { dealCards, getScore, shuffleDeck }
 )(App)

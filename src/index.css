@@ -7,3 +7,43 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.app {
+  display: grid;
+  margin: 20px auto;
+  max-width: 960px;
+}
+
+.button {
+  align-self: center;
+  margin-top: 20px;
+}
+
+.hand {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: 180px;
+}
+
+.card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100px;
+  height: 180px;
+  margin: auto auto;
+}
+
+.card__container {
+  width: 100px;
+  height: 150px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.card__state {
+  height: 25px;
+}

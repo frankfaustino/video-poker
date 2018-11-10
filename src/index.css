@@ -43,6 +43,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: red;
   margin: 20px auto;
   max-width: 960px;
 }

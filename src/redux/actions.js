@@ -1,9 +1,11 @@
-export const dealCards = () => ({ type: 'DEAL_CARDS' })
+export const shuffleAndDeal = () => dispatch => {
+  dispatch({ type: 'SHUFFLE_DECK' })
+  dispatch({ type: 'DEAL_CARDS' })
+}
 
-export const replaceCards = () => ({ type: 'REPLACE_CARDS' })
-
-export const getScore = () => ({ type: 'GET_SCORE' })
-
-export const shuffleDeck = () => ({ type: 'SHUFFLE_DECK' })
+export const replaceCards = () => dispatch => {
+  dispatch({ type: 'REPLACE_CARDS' })
+  dispatch({ type: 'GET_SCORE' })
+}
 
 export const toggleCard = id => ({ type: 'TOGGLE_CARD', id })

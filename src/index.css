@@ -15,6 +15,7 @@
 
 * {
   font-family: 'short';
+  font-size: 100%;
 }
 
 body {
@@ -30,13 +31,14 @@ body {
 
 header {
   font-family: 'short';
-  font-size: 4rem;
-  letter-spacing: -8px;
+  font-size: 3rem;
+  letter-spacing: -4px;
   color: #feff00;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   text-shadow: -2px 2px red, 2px 2px red, -2px -2px red, 2px -2px red;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .app {
@@ -50,6 +52,7 @@ header {
 .button {
   align-self: center;
   margin-top: 20px;
+  padding: 0;
   width: 150px;
   height: 50px;
   border-radius: 5px;
@@ -60,12 +63,15 @@ header {
   background-color: #feff00;
   font-family: 'tall';
   font-size: 2rem;
+  text-align: center;
 }
 
 .hand {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  height: 180px;
+  align-items: end;
+  height: 140px;
+  margin-bottom: 20px;
 }
 
 .card {
@@ -74,22 +80,29 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  width: 100px;
-  height: 180px;
-  margin: auto auto;
+  width: 70px;
+  height: 140px;
+  margin: 0 auto;
 }
 
 .card__container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(3, 1fr);
-  width: 100px;
-  height: 150px;
+  width: 70px;
+  height: 100px;
   border: 1px solid #000;
   border-radius: 5px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   background-color: white;
+}
+
+.card__state {
+  font-family: 'tall';
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 15px;
 }
 
 .card__top-number {
@@ -110,13 +123,6 @@ header {
   grid-row-start: 3;
   grid-column-start: 3;
   transform: rotate(180deg);
-}
-
-.card__state {
-  font-family: 'tall';
-  font-size: 1rem;
-  color: white;
-  height: 30px;
 }
 
 .score {
@@ -152,4 +158,34 @@ header {
 
 .kept {
   transform: translateY(-10px);
+}
+
+@media (min-width: 768px) {
+  header {
+    font-size: 4rem;
+  }
+
+  .hand {
+    height: 185px;
+  }
+
+  .card {
+    width: 100px;
+    height: 185px;
+  }
+
+  .card__container {
+    font-size: 1.5rem;
+    width: 100px;
+    height: 150px;
+  }
+
+  .card__state {
+    height: 30px;
+    margin-bottom: 0px;
+  }
+
+  .score {
+    top: 113px;
+  }
 }

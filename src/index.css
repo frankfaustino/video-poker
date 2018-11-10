@@ -51,6 +51,7 @@ header {
 
 .button {
   align-self: center;
+  padding: 0px;
   margin-top: 20px;
   width: 150px;
   height: 50px;

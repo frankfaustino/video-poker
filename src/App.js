@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Button from './components/Button'
 import Hand from './components/Hand'
 import Score from './components/Score'
-import { dealCards, getScore, shuffleDeck } from './redux/actions'
+import { dealCards, replaceCards, getScore, shuffleDeck } from './redux/actions'
 
 class App extends PureComponent {
   componentDidMount() {
@@ -15,12 +15,21 @@ class App extends PureComponent {
   }
 
   render() {
-    const { dealCards, getScore, go } = this.props
+    const { dealCards, getScore, go, replaceCards } = this.props
     return (
       <div className="app">
         <Hand />
-        <Button clickHandler={go ? getScore : dealCards}>
+        {/* <Button clickHandler={go ? getScore : dealCards}>
           {go ? 'Go' : 'Deal'}
+        </Button> */}
+        <Button clickHandler={dealCards}>
+          Deal Cards
+        </Button>
+        <Button clickHandler={getScore}>
+          Get Score
+        </Button>
+        <Button clickHandler={replaceCards}>
+          Replace
         </Button>
         <Score />
       </div>
@@ -35,5 +44,5 @@ App.propTypes = {
 
 export default connect(
   ({ go }) => ({ go }),
-  { dealCards, getScore, shuffleDeck }
+  { dealCards, getScore, replaceCards, shuffleDeck }
 )(App)

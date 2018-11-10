@@ -1,8 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Score = () => (
-  <div className="score">Score</div>
+const Score = ({ score }) => (
+  <div className="score">{score}</div>
 )
 
-export default connect(null, {})(Score)
+Score.defaultProps = { score: null }
+
+Score.propTypes = { score: PropTypes.number }
+
+export default connect(({ score }) => ({ score }), {})(Score)

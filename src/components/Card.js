@@ -25,7 +25,7 @@ const Card = ({ id, kept, number, suit, toggleCard }) => {
 
   return (
     <div className="card">
-      {kept && <div className="card__state">HELD</div>}
+      <div className={`card__state${kept ? '' : ' hidden'}`}>HELD</div>
       <div className={`card__container${color}${kept ? ' kept' : ''}`} onClick={() => toggleCard(id)}>
         <div className="card__top-number">{num}</div>
         <div className="card__suit">{suit}</div>

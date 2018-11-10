@@ -1,12 +1,13 @@
 let id = 1
-const suits = ['♣', '♦', '❤', '♠']
+const suits = ['♣️', '♦️', '♥️', '♠️']
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 const deck = suits.reduce((arr, suit) => [...arr, ...numbers.map(number => ({ id: id++, number, suit, kept: false }))], [])
 
 const initialState = {
   deck,
   hand: {},
-  go: false,
+  round: false,
+  gameStart: false,
   score: null,
 }
 
@@ -58,25 +59,27 @@ export default (state = initialState, action) => {
       const hand = Object.values(state.hand)
       hand.sort((a, b) => a.number - b.number)
       let score = Math.max(isStraight(hand), isPair(hand))
-      return { ...state, go: false, score }
+      return { ...state, round: false, score }
     }
     case 'SHUFFLE_DECK': {
-      const deck = shuffleDeck([...state.deck])
-      return { ...state, deck }
+      const hand = Object.values(state.hand)
+      const deck = shuffleDeck([...state.deck, ...hand])
+      return { ...state, deck, hand: {} }
     }
     case 'DEAL_CARDS': {
       const deck = [...state.deck]
       const hand = dealCards(deck)
-      return { ...state, deck, hand }
+      return { ...state, deck, gameStart: true, round: true, hand }
     }
     case 'REPLACE_CARDS': {
       const [deck, hand] = replaceCards({ ...state.hand }, [...state.deck])
       return { ...state, deck, hand }
     }
     case 'TOGGLE_CARD': {
+      const { id } = action
       const hand = { ...state.hand }
-      hand[action.id].kept = !hand[action.id].kept
-      return { ...state, hand, go: true }
+      hand[id].kept = !hand[id].kept
+      return { ...state, hand }
     }
     default:
       return state

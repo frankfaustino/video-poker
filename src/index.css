@@ -39,20 +39,11 @@ header {
   text-align: center;
 }
 
-#root {
-  width: 100vw;
-  height: 100vh;
-  background-color: white;
-}
-
 .app {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: red;
   margin: 20px auto;
-  width: 100vw;
-  height: 100vh;
   max-width: 960px;
 }
 

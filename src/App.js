@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 
 import Button from './components/Button'
 import Hand from './components/Hand'
+import Header from './components/Header'
 import Score from './components/Score'
 import { replaceCards, shuffleAndDeal } from './redux/actions'
 
 const App = ({ gameStart, replaceCards, round, shuffleAndDeal }) => {
   const drawOrDeal = () => {
     return round ? (
-      <Button clickHandler={replaceCards}>DRAW</Button>
+      <Button type=" button__draw" clickHandler={replaceCards}>DRAW</Button>
     ) : (
       <Button clickHandler={shuffleAndDeal}>DEAL</Button>
     )
@@ -20,19 +21,19 @@ const App = ({ gameStart, replaceCards, round, shuffleAndDeal }) => {
     return (
       <>
         <Hand />
-        {drawOrDeal()}
         <Score />
+        {drawOrDeal()}
       </>
     )
   }
 
   return (
     <div className="app">
-      <header>RETRO VIDEO POKER</header>
+      <Header />
       {gameStart ? (
         renderBoard()
       ) : (
-        <Button clickHandler={shuffleAndDeal}>DEAL</Button>
+        <Button clickHandler={shuffleAndDeal}>START</Button>
       )}
     </div>
   )

@@ -30,6 +30,20 @@ body {
 }
 
 header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  display: inline-block;
+  position: absolute;
+  font-size: 3rem;
+  top: 60px;
+  margin-left: 50px;
+  transform: rotate(-15deg);
+}
+
+.title {
   font-family: 'short';
   font-size: 3rem;
   letter-spacing: -4px;
@@ -37,8 +51,6 @@ header {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   text-shadow: -2px 2px red, 2px 2px red, -2px -2px red, 2px -2px red;
-  text-align: center;
-  margin-bottom: 20px;
 }
 
 .app {
@@ -64,6 +76,24 @@ header {
   font-family: 'tall';
   font-size: 2rem;
   text-align: center;
+}
+
+.button__draw {
+  border-top: 3px solid #FF5C5C;
+  border-left: 3px solid #FF5C5C;
+  border-bottom: 3px solid #BA0000;
+  border-right: 3px solid #BA0000;
+  background-color: #FF0000;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 1;
+  top: 162px;
+  width: 100%;
+  height: 102px;
+  left: 0;
+  background-color: rgba(0,0,0,0.15);
 }
 
 .hand {
@@ -126,25 +156,51 @@ header {
 }
 
 .score {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 85px;
-  left: 0;
-  width: 100%;
-  height: 180px;
-  margin: 0 auto;
-}
-
-.score__text {
-  text-align: center;
   font-family: 'arcade';
   font-size: 3rem;
+  text-align: center;
+  align-self: center;
+  color: white;
+}
+
+.score__container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'top top' 'left right';
+  width: 100%;
+  height: 120px;
+  margin: 0 auto;
   background-color: black;
   width: 300px;
-  color: white;
+}
+
+.score__top {
+  grid-area: top;
+}
+
+.score__left {
+  grid-area: left;
+}
+
+.score__right {
+  grid-area: right;
+}
+
+.blinking {
+  animation: blinking__text 0.8s infinite;
+}
+
+@keyframes blinking__text {
+  0% {
+    color: white;
+  }
+  50%{
+    color: transparent;
+  }
+  100% {
+    color: white;
+  }
 }
 
 .hidden {
@@ -161,8 +217,17 @@ header {
 }
 
 @media (min-width: 768px) {
-  header {
+  .logo {
     font-size: 4rem;
+  }
+
+  .title {
+    font-size: 4rem;
+  }
+
+  .overlay {
+    top: 183px;
+    height: 152px;
   }
 
   .hand {

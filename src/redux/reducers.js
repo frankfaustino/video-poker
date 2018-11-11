@@ -9,6 +9,7 @@ const initialState = {
   round: false,
   gameStart: false,
   score: null,
+  totalScore: 0
 }
 
 const shuffleDeck = deck => {
@@ -69,7 +70,8 @@ export default (state = initialState, action) => {
     case 'DEAL_CARDS': {
       const deck = [...state.deck]
       const hand = dealCards(deck)
-      return { ...state, deck, gameStart: true, round: true, hand }
+      const totalScore = state.totalScore + state.score
+      return { ...state, deck, gameStart: true, hand, round: true, score: null, totalScore }
     }
     case 'REPLACE_CARDS': {
       const [deck, hand] = replaceCards({ ...state.hand }, [...state.deck])
